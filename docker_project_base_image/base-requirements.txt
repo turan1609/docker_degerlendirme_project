@@ -1,0 +1,6 @@
+# Bu dosyanın içeriği: base-requirements.txt
+pyspark==3.5.1
+jupyter
+notebook
+findspark # Bu paketler genellikle tüm projeler için ortaktır.
+psutil

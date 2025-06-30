@@ -1,0 +1,11 @@
+services:
+  student_project:
+    image: python-java-env:1.0
+    ports:
+      - "8888:8888"
+      - "4040:4040"
+    volumes:
+      - .:/app
+    command: >
+      sh -c "if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt; fi &&
+             python -m notebook --ip=0.0.0.0 --port=8888 --allow-root --no-browser --NotebookApp.token="

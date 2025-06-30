@@ -1,0 +1,24 @@
+# docker-compose.yml
+
+services:
+  student_project:
+    # 'build' yerine, hocanın lokalindeki hazır imajı kullanıyoruz.
+    image: python-java-env:1.0
+    
+    # Her proje için benzersiz bir konteyner adı oluşturmak iyi bir pratiktir.
+    # Docker Compose bunu otomatik olarak yapar, bu satır isteğe bağlıdır.
+    # container_name: odev_calisma_ortami
+
+    ports:
+      - "8888:8888"  # Jupyter Notebook erişimi
+      - "4040:4040"  # Spark UI erişimi
+    
+    volumes:
+      # Mevcut proje klasörünü, konteynerin /app dizinine bağlıyoruz.
+      - .:/app
+    
+    # Konteyner başladığında, önce öğrencinin özel bağımlılıklarını kurar,
+    # sonra Jupyter'i başlatır.
+    command: >
+      sh -c "if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt; fi &&
+             python -m notebook --ip=0.0.0.0 --port=8888 --allow-root --no-browser --NotebookApp.token="
