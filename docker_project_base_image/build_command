@@ -1,0 +1,1 @@
+docker build -t python-java-env:1.0 -f base.Dockerfile .

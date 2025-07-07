@@ -2,10 +2,12 @@ services:
   student_project:
     image: python-java-env:1.0
     ports:
-      - "8888:8888"
-      - "4040:4040"
+      - "8880:8880"  # Jupyter Notebook
+      - "4041:4041"  # Spark UI
+    
     volumes:
       - .:/app
+      - ../data:/app/data:ro
     command: >
       sh -c "if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt; fi &&
-             python -m notebook --ip=0.0.0.0 --port=8888 --allow-root --no-browser --NotebookApp.token="
+             python -m notebook --ip=0.0.0.0 --port=8880 --allow-root --no-browser --NotebookApp.token="
